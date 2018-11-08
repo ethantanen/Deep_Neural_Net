@@ -17,7 +17,7 @@ def mismatches(x,y,title):
 
 # read in dataset
 df = pd.read_csv('dataset.txt')
-df = df.sample(frac=1)
+# df = df.sample(frac=1)
 
 # seperate feature vectors and labels
 X = df.iloc[:,:-1].values
@@ -32,10 +32,11 @@ hot_y = np.delete(np.eye(4)[y_num], 0, axis=1)
 
 print('\n\nMachines with 2 Features for Graphing\n')
 
-d = DNN(shape=[4,2,2,3], eta =1, n_epoch=1000)
+
+
+d = DNN(shape=[4,1,3], eta =1, n_epoch=100)
 d.fit(X, hot_y)
 p = d.predict(X)
-
 p = [list(i).index(max(list(i))) + 1 for i in p]
 mismatches(p,y_num,'ass')
 
