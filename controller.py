@@ -22,7 +22,7 @@ df = pd.read_csv('dataset.txt')
 # seperate feature vectors and labels
 X = df.iloc[:,:-1].values
 print(X[0])
-X= scale(X)
+X = scale(X)
 print(X[0])
 y = df.iloc[:, [4]].values
 
@@ -32,20 +32,13 @@ hot_y = np.delete(np.eye(4)[y_num], 0, axis=1)
 
 print('\n\nMachines with 2 Features for Graphing\n')
 
-
-
-d = DNN(shape=[4,1,3], eta =1, n_epoch=100)
+d = DNN(shape=[4,2,3], eta =.1, n_epoch=100)
+print(d.shape)
 d.fit(X, hot_y)
 p = d.predict(X)
 p = [list(i).index(max(list(i))) + 1 for i in p]
+
 mismatches(p,y_num,'ass')
-
-# lrn1 = lrn.LogisticRegressionNet(eta=.0001, n_iter=5000, C=0.0009)
-# lrn1.fit(X, hot_y)
-# predictions = lrn1.predict(X)
-# mismatches(predictions, y_num, 'Logistic 2D')
-# pdr.graph(X, y_num, lrn1, 'Logistic Net in 2D')
-
 
 
 print('\n\nEnd.\n')
